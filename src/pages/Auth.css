@@ -1,0 +1,30 @@
+.auth { min-height: calc(100vh - 68px); display: grid; place-items: center; padding: 2.5rem 1.25rem; }
+.auth__card { width: min(460px, 100%); background: var(--white); border: 1px solid var(--line); border-radius: 18px; padding: 2rem; display: grid; gap: 1.1rem; }
+.auth__card h1 { font-size: 1.9rem; }
+.auth__sub { color: var(--muted); margin-top: -0.5rem; }
+.auth__alert { background: #fdecec; color: #9b1c1c; border: 1px solid #f3c1c1; border-radius: 10px; padding: 0.7rem 0.9rem; font-size: 0.95rem; }
+.auth__switch { text-align: center; color: var(--muted); }
+.auth__switch a { color: var(--teal-dark); font-weight: 600; }
+.auth .btn { width: 100%; text-align: center; }
+.auth .btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+.field { display: grid; gap: 0.35rem; }
+.field label { font-weight: 600; font-size: 0.95rem; }
+.field input { font: inherit; padding: 0.75rem 0.9rem; border: 1.5px solid var(--line); border-radius: 10px; background: var(--paper); color: var(--ink); }
+.field input:focus { outline: none; border-color: var(--teal); box-shadow: 0 0 0 3px rgba(11, 143, 140, 0.2); }
+.field input[aria-invalid="true"] { border-color: #c0392b; }
+.field__error { color: #9b1c1c; font-size: 0.85rem; }
+
+.roles { border: 0; padding: 0; margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; }
+.roles legend { font-weight: 600; font-size: 0.95rem; margin-bottom: 0.5rem; padding: 0; }
+.roles__opt { display: grid; gap: 0.2rem; padding: 0.8rem; border: 1.5px solid var(--line); border-radius: 12px; cursor: pointer; font-size: 0.85rem; color: var(--muted); }
+.roles__opt strong { color: var(--ink); font-size: 1rem; }
+.roles__opt input { position: absolute; opacity: 0; pointer-events: none; }
+.roles__opt.is-selected { border-color: var(--teal); background: rgba(11, 143, 140, 0.07); }
+.roles__opt:has(input:focus-visible) { outline: 3px solid var(--amber); outline-offset: 2px; }
+
+.about { max-width: 42rem; display: grid; gap: 1.2rem; }
+.about p { color: var(--muted); font-size: 1.1rem; }
+.about .btn { justify-self: start; }
+
+@media (max-width: 480px) { .roles { grid-template-columns: 1fr; } }
