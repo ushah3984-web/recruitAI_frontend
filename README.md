@@ -1,16 +1,34 @@
-# React + Vite
+# RecruitAI – Frontend (FYP 23F-12)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React + Vite frontend for *RecruitAI: An AI-Powered Adaptive Interview Platform for Recruitment Screening*, built against the Software Design Specification (SDS).
 
-Currently, two official plugins are available:
+```bash
+npm install
+npm run dev      # development
+npm run build    # production build
+npm run lint
+```
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Demo accounts (mock backend, no server needed)
+| Role | Email | Password |
+|---|---|---|
+| Recruiter | recruiter@recruitai.demo | Recruiter@123 |
+| Candidate | candidate@recruitai.demo | Candidate@123 |
+| Administrator | admin@recruitai.demo | Admin@123 |
 
-## React Compiler
+Administrators can restore seed data from **User Accounts → Reset demo data**.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Portals (SDS §9)
+- **Public:** landing page, about, login, registration (Candidate / Recruiter).
+- **Recruiter:** job postings, create/edit job profile, candidate ranking with skill-gap profile, reports, evaluation report with synchronised playback and export, candidate comparison with export.
+- **Candidate:** open jobs and résumé upload (PDF/DOCX), application status, consent screen, interview room (browser capture module).
+- **Administrator:** user accounts and roles, audit log.
 
-## Expanding the ESLint configuration
+## Structure
+- `src/api/services.js` – application-layer boundary (JobProfileService, ResumeService, InterviewSessionManager, RecordingIngest, ReportGenerator, AuditLogger). Replace its bodies with `fetch`/WebSocket calls to FastAPI; pages do not change.
+- `src/api/auth.js` – set `VITE_API_URL` to use a real `/auth/login` and `/auth/register`.
+- `src/api/db.js` – localStorage mock database and seed data. `src/api/aiMock.js` – heuristic stand-ins for the AI services.
+- `src/portal/*` – role pages; `src/components/*` – shared UI; `src/hooks/useCapture.js` – getUserMedia / getDisplayMedia / MediaRecorder.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## What is mocked (needs backend/AI work)
+CV parsing, embeddings/cosine matching, question generation, answer scoring and behavioral indicators are deterministic heuristics (`aiMock.js`). Passwords and RBAC are enforced only in the browser. Recording chunks are counted, not uploaded; report playback is simulated. Data lives in each browser's localStorage. Report export is HTML (printable to PDF); comparison export is CSV.
